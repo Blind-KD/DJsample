@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1>{{ apk.albumName }}</h1>
+	<div>
+		<form method="POST"> {% csrf_token %}
+			{{ form|crispy }}
+			<button type="submit" class="btn btn-success">Update</button>
+			<a href="{% url 'album-detail' apk.id %}">Cancel</a>
+		</form>
+	</div>
+{% endblock content %}

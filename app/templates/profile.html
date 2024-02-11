@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<div class="content-section">
+		<center>
+			<div class="media">
+				<div class="media-body">
+					{% if pro.profileName != user.profile.profileName %}
+						<img class="rounded-circle account-img" src="{{ pro.profilePic.url }}">
+					{% endif %}
+					<h2 class="account-heading">{{ pro.profileName }}</h2>
+					<p class="text-secondary">{{ pro.profileName.email }}</p>
+					{% if pro.profileName == user.profile.profileName %}
+					<a href="{% url 'user-update' %}">
+						<button class="btn btn-dark">Update Profile</button>
+					</a>
+					{% endif %}
+				</div>
+				</div> 
+			</center>
+				
+	</div>
+	{% for x in alb %}
+	<a href="{% url 'album-detail' x.id %}">
+		<div class="content-section">
+			<div class="row">
+				<div class="col-md-2">
+				<img class="rounded-circle account-img" src="{{ x.author.profile.profilePic.url }}"> 
+				</div>
+				<div class="col-md-10">
+				<h3>{{ x.albumName }}</h3> 
+				<p>{{ x.author }}</p> 
+				<h6>{{ x.dateTime }}</h6>
+				</div>
+			</div>
+		</div>
+	</a>
+	{% endfor %}
+{% endblock content %}

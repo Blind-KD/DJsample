@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<div> 
+		<img class="img-thumbnail"  src="{{ ipk.image.url }}">
+		<h3>{{ ipk.photoName }}</h3>
+		<h3>{{ ipk.imgDescription }}</h3>
+	</div>
+	<div>
+		<form method="POST"> {% csrf_token %}
+			{{ form|crispy }}
+			<button type="submit" class="btn btn-success">Update</button>
+			<a href="{% url 'photo-detail' ipk.id %}">Cancel</a>
+		</form>
+	</div>
+{% endblock content %}

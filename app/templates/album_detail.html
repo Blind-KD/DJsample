@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<!-- Modal Update -->
+	<div class="modal fade" id="ModalCenterUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+				<h5 class="modal-title">{{ apk.albumName }}</h5> 
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				</div>
+				<div class="modal-body">
+					<form class="d-flex" action="{% url 'album-detail' apk.id %}" method="POST"> {% csrf_token %}
+						<input class="form-control me-2" type="text" placeholder="Updated Name" name="update">
+						<button class="btn btn-info" type="submit">Save</button>
+					</form>
+				</div> 
+			</div>
+		</div>
+	</div>
+ 
+    <div class="content-section">
+		{% if user.profile.profileName == apk.author %}
+			<button class="btn btn-success " data-toggle="modal" data-target="#ModalCenterUpdate">Update</button>
+			<a href="{% url 'album-delete' apk.id %}">
+				<button class="btn btn-warning" >Delete</button>
+			</a>
+		{% endif %}
+		<div><h1></h1></div>
+		
+		<div class="content-section"> 
+			<img class="rounded-circle account-img" src="{{ apk.author.profile.profilePic.url }}"> 
+		
+			<div class="row">
+				<div class="col-md-3">
+					<h3>{{ apk.albumName }}</h3>
+					<p>{{ apk.author }}</p>
+					<h6>{{ apk.dateTime }}</h6>
+					{% if user.profile.profileName == apk.author %}
+					<a href="{% url 'upload-photo' apk.id %}">
+						<button class="btn btn-info">Upload</button>
+					</a>
+					<a href="{% url 'photos' apk.id %}">
+						<button class="btn btn-info">Photos</button>
+					</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %} 
+	<!-- Modal -->
+	<div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+				<h5 class="modal-title">Create Album</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				</div>
+				<div class="modal-body">
+					<form class="d-flex" action="{% url 'home' %}" method="POST"> {% csrf_token %}
+						<input class="form-control me-2" type="text" placeholder="Album Name" name="album">
+						<button class="btn btn-info" type="submit">Create</button>
+					</form>
+				</div> 
+			</div>
+		</div>
+	</div>
+
+	<button class="btn btn btn-outline-info" data-toggle="modal" data-target="#ModalCenter">
+		CREATE
+	</button> 
+	<div><h1></h1></div>
+
+	{% for x in alb %}
+	<a href="{% url 'album-detail' x.id %}">
+		<div class="content-section">
+			<div class="row">
+				<div class="col-md-2">
+					<img class="rounded-circle account-img" src="{{ x.author.profile.profilePic.url }}"> 
+				</div>
+				<div class="col-md-10">
+					<h3>{{ x.albumName }}</h3> 
+					<p>{{ x.author }}</p> 
+					<h6>{{ x.dateTime }}</h6>
+				</div>
+			</div>
+		</div>
+	</a>
+{% endfor %}
+{% endblock content %}

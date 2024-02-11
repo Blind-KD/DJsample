@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %} 
+{% for x in searched %}
+	<a href="{% url 'profile' x.id %}">
+		<div class="content-section">
+			<div class="row">
+				<div class="col-md-2">
+				<img class="rounded-circle account-img" src="{{ x.profilePic.url }}"> 
+				</div>
+				<div class="col-md-10">
+				<h3>{{ x.profileName }}</h3>
+				</div>
+			</div>
+		</div>
+	</a>
+{% endfor %}
+{% endblock content %}

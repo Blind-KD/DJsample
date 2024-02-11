@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<div> 
+		<img class="img-thumbnail"  src="{{ img.image.url }}">
+		<h3>{{ img.photoName }}</h3>
+		<div> 
+			<a href="{% url 'update-photo' img.id %}">	 
+				<button class="btn btn-success">Update</button>
+			</a>
+			<a href="{% url 'delete-photo' img.id %}">	 
+				<button class="btn btn-warning">Delete</button>
+			</a>
+			<a href="{% url 'photo-list' img.photoAlbum_id %}">	 
+				<button class="btn btn-warning">Back</button>
+			</a> 
+		</div> 
+	</div>
+{% endblock content %}

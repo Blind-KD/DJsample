@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<div> 
+		<form method="POST"> {% csrf_token %}
+			<h2>{{ ipk.photoName }}</h2>
+			<h3>Delete this Photo?</h3>
+			<button type="submit" class="btn btn-danger">Delete</button>
+			<a href="{% url 'photo-detail' ipk.id %}">Cancel</a> 
+		</form> 
+	</div>
+{% endblock content %}
